@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Inicio</title>
+    <link rel="stylesheet" type="text/css" href="home-styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Página de Inicio</h1>
+    
+        <div class="user-info">
+          <img src="profile-pic.jpg" alt="Foto de perfil" class="profile-pic">
+          <h3>@ejemplo_usuario</h3>
+        </div>
+    
+        <div class="photos">
+          <h2>Mis Fotos</h2>
+          <div class="photo-grid">
+            <!--<img src="photo1.jpg" alt="Foto 1">
+            <img src="photo2.jpg" alt="Foto 2">
+            <img src="photo3.jpg" alt="Foto 3">
+            <img src="photo4.jpg" alt="Foto 4">
+            <img src="photo5.jpg" alt="Foto 5">
+            <img src="photo6.jpg" alt="Foto 6"> -->
+          </div>
+        </div>
+    
+        <div class="stats">
+          <h2>Estadísticas</h2>
+    
+          <div class="bar-chart">
+            <canvas id="likesChart"></canvas>
+          </div>
+    
+          <div class="other-stats">
+            <div class="stat">
+              <h3>Publicaciones más famosas</h3>
+              <ol>
+                <li>Publicación 1</li>
+                <li>Publicación 2</li>
+                <li>Publicación 3</li>
+              </ol>
+            </div>
+    
+            <div class="stat">
+              <h3>Otro dato estadístico</h3>
+              <p>Valor: 100</p>
+            </div>
+            <div class="chart-container">
+                <canvas id="postTypesChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <script src="home-script.js"></script>
+      <script src="api.js"></script>
+</body>
+</html>
