@@ -1,0 +1,67 @@
+/* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #F9F9F9;
+  color: #1A0A5C;
+}
+
+/* Estilos del encabezado */
+header {
+  background-color: #FFFFFF;
+  padding: 10px 0;
+}
+
+.navbar-brand img {
+  max-height: 40px;
+}
+
+.navbar-toggler {
+  border: none;
+}
+
+/* Estilos de la sección de fotos */
+.photos {
+  background-color: #F1F1F1;
+  padding: 50px 0;
+}
+
+.photos h1 {
+  color: #1A0A5C;
+}
+
+.photos .photo-item {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease;
+}
+
+.photos .photo-item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.photos img {
+  max-width: 100%;
+}
+
+/* Estilos del pie de página */
+footer {
+  background-color: #1A0A5C;
+  color: #666;
+  padding: 20px 0;
+}
+
+.footer-social-icons {
+  font-size: 20px;
+}
+
+.footer-social-icons i {
+  color: #1A0A5C;
+  transition: color 0.3s ease;
+}
+
+.footer-social-icons i:hover {
+  color: #A70566;
+}
+
+.footer-social-icons a {
+  margin: 0 5px;
+}
