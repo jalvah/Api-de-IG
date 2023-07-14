@@ -3,13 +3,13 @@
 const fotos = document.querySelector('.row');
 const usuario = document.querySelector('.user-info');
 
-const token1 = `IGQVJWYjd5b2hFaXRpTkF4a0p3NHRkNzZA0dFVLbjRmYWZAGaDFS`
+const token1 = `IGQVJXNlJROGJVbEw4dVVnUjQtbzNiZA0pYZ`
 
-const token2 = `UGV1TXdUcWdwQ3lJYjhOeGo5VC1FdmhHR1JjZ`;
+const token2 = `A3FndWdmRi1ZAVVhEdkdQYXJ2QlVQZAG9tTk`;
 
-const token3 = `AHFSLWVoQ05sMnBuczd6el96cnJ2RW9FNG0`;
+const token3 = `tQQmcxSXNSLVBPTUV2YmJydEFqUlQ3YzZATO`;
 
-const token4 = `3eks3dTJjXzJ2S1JVbzJVTXRxbTNFcgZDZD`;
+const token4 = `XJ0c3R0c3ZAfd3g3cWVUNm9GR09QUEE4M1hBX3llUEVjdlBobgZDZD`;
 
 const url = `https://graph.instagram.com/me/media?fields=thumbnail_url,media_url,caption,username,permalink&limit=80&access_token=${token1}${token2}${token3}${token4}`;
 
