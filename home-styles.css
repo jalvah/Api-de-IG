@@ -1,0 +1,72 @@
+/* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #1a0a5c;
+}
+
+/* Estilos del encabezado */
+header {
+  background-color: #fff;
+  padding: 10px 0;
+}
+
+.navbar-brand img {
+  max-height: 40px;
+}
+
+.navbar-toggler {
+  border: none;
+}
+
+/* Estilos de la sección hero */
+.hero {
+  background-color: #1a0a5c;
+  padding: 100px 0;
+  text-align: center;
+}
+
+.hero h1 {
+  color: #fff;
+}
+
+.hero p {
+  color: #fff;
+}
+
+/* Estilos de la sección user-info */
+.user-info {
+  background-color: #f9f9f9;
+  padding: 50px 0;
+}
+
+.user-info h2 {
+  color: #1a0a5c;
+}
+
+.user-info p {
+  color: #666;
+}
+
+/* Estilos del pie de página */
+footer {
+  background-color: #f9f9f9;
+  color: #666;
+}
+
+.footer-social-icons {
+  font-size: 20px;
+}
+
+.footer-social-icons i {
+  color: #1a0a5c;
+  transition: color 0.3s ease;
+}
+
+.footer-social-icons i:hover {
+  color: #a70566;
+}
+
+.footer-social-icons a {
+  margin: 0 5px;
+}
