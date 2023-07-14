@@ -1,106 +1,205 @@
-// Código para el gráfico de Likes por Mes
-var likesChart = new Chart(document.getElementById("likesChart"), {
-  type: 'bar',
-  data: {
-    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'],
-    datasets: [{
-      label: 'Likes',
-      data: [100, 200, 150, 300, 250],
-      backgroundColor: 'rgba(54, 162, 235, 0.5)',
-      borderColor: 'rgba(54, 162, 235, 1)',
-      borderWidth: 1
-    }]
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
+const token1 = `IGQVJWYjd5b2hFaXRpTkF4a0p3NHRkNzZA0dFVLbjRmYWZAGaDFS`;
+const token2 = `UGV1TXdUcWdwQ3lJYjhOeGo5VC1FdmhHR1JjZ`;
+const token3 = `AHFSLWVoQ05sMnBuczd6el96cnJ2RW9FNG0`;
+const token4 = `3eks3dTJjXzJ2S1JVbzJVTXRxbTNFcgZDZD`;
+const url = `https://graph.instagram.com/me/media?fields=id,caption,media_type,timestamp&limit=80&access_token=${token1}${token2}${token3}${token4}`;
+
+fetch(url)
+  .then((res) => res.json())
+  .then((data) => {
+    const mediaTypes = data.data.map((item) => {
+      item.likes = Math.floor(Math.random() * 100) + 1; // Genera un número aleatorio entre 1 y 100 como cantidad de likes
+      item.month = new Date(item.timestamp).getMonth() + 1; // Obtiene el mes (1-12) de la fecha de publicación
+      return item;
+    });
+    const hashtagsCount = countHashtags(data.data);
+    createLikesChart(mediaTypes);
+    generateLikesTable(mediaTypes);
+    
+    createContentChart(mediaTypes);
+    createHashtagsChart(hashtagsCount);
+  });
+
+function createLikesChart(mediaTypes) {
+  const likes = mediaTypes.map((item) => item.likes);
+  const months = mediaTypes.map((item) => getMonthName(item.month)); // Obtener los nombres de los meses
+
+  const ctx = document.getElementById("likesChart").getContext("2d");
+
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: months, // Usar los nombres de los meses como etiquetas
+      datasets: [
+        {
+          label: "Likes",
+          data: likes,
+          backgroundColor: "rgba(75, 192, 192, 0.6)",
+          borderColor: "rgba(75, 192, 192, 1)",
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          stepSize: 10,
+        },
+      },
+    },
+  });
+}
+
+function getMonthName(month) {
+  const monthNames = [
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre",
+  ];
+  return monthNames[month - 1];
+}
+function generateLikesTable(mediaTypes) {
+  const tableBody = document.getElementById("likesTableBody");
+
+  // Ordenar las publicaciones por mes de forma ascendente
+  const sortedMediaTypes = mediaTypes.sort((a, b) => a.month - b.month);
+
+  for (let i = 1; i < sortedMediaTypes.length; i++) {
+    const currentPost = sortedMediaTypes[i];
+    const previousPost = sortedMediaTypes[i - 1];
+    const difference = currentPost.likes - previousPost.likes;
+    const trend = difference > 0 ? "Sube" : difference < 0 ? "Baja" : "Sin cambios";
+
+    const row = document.createElement("tr");
+    const monthCell = document.createElement("td");
+    const currentPostCell = document.createElement("td");
+    const previousPostCell = document.createElement("td");
+    const differenceCell = document.createElement("td");
+    const trendCell = document.createElement("td");
+
+    monthCell.textContent = getMonthName(currentPost.month);
+    currentPostCell.textContent = currentPost.likes;
+    previousPostCell.textContent = previousPost.likes;
+    differenceCell.textContent = difference;
+    trendCell.textContent = trend;
+
+    row.appendChild(monthCell);
+    row.appendChild(currentPostCell);
+    row.appendChild(previousPostCell);
+    row.appendChild(differenceCell);
+    row.appendChild(trendCell);
+
+    tableBody.appendChild(row);
+  }
+}
+
+function createContentChart(mediaTypes) {
+  const fotoCount = mediaTypes.filter(
+    (item) => item.media_type === "IMAGE"
+  ).length;
+  const videoCount = mediaTypes.filter(
+    (item) => item.media_type === "VIDEO" || item.media_type === 2
+  ).length;
+
+  const ctx = document.getElementById("contentChart").getContext("2d");
+
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: ["Fotos", "Videos"],
+      datasets: [
+        {
+          label: "Cantidad",
+          data: [fotoCount, videoCount],
+          backgroundColor: [
+            "rgba(75, 192, 192, 0.6)",
+            "rgba(255, 99, 132, 0.6)",
+          ],
+          borderColor: ["rgba(75, 192, 192, 1)", "rgba(255, 99, 132, 1)"],
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          stepSize: 1,
+        },
+      },
+    },
+  });
+}
+
+function countHashtags(posts) {
+const hashtagsCount = {};
+
+for (const post of posts) {
+const caption = post.caption;
+
+if (caption) {
+const regex = /#\w+/g;
+const hashtags = caption.match(regex);
+
+if (hashtags) {
+  for (const hashtag of hashtags) {
+    if (hashtagsCount[hashtag]) {
+      hashtagsCount[hashtag]++;
+    } else {
+      hashtagsCount[hashtag] = 1;
     }
   }
-});
+}
+}
+}
 
-// Código para el gráfico de Tipo de Contenido
-var contentChart = new Chart(document.getElementById("contentChart"), {
-  type: 'pie',
-  data: {
-    labels: ['Fotos', 'Videos', 'Historias'],
-    datasets: [{
-      label: 'Tipo de Contenido',
-      data: [60, 30, 10],
-      backgroundColor: ['rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.5)', 'rgba(255, 205, 86, 0.5)'],
-      borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 205, 86, 1)'],
-      borderWidth: 1
-    }]
-  }
-});
+return hashtagsCount;
+}
 
-// Código para el gráfico de Crecimiento de Seguidores
-var followersChart = new Chart(document.getElementById("followersChart"), {
-  type: 'line',
-  data: {
-    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'],
-    datasets: [{
-      label: 'Seguidores',
-      data: [1000, 1200, 1500, 1800, 2000],
-      backgroundColor: 'rgba(75, 192, 192, 0.5)',
-      borderColor: 'rgba(75, 192, 192, 1)',
-      borderWidth: 1
-    }]
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    }
-  }
-});
+function createHashtagsChart(hashtagsCount) {
+  const labels = Object.keys(hashtagsCount);
+  const data = Object.values(hashtagsCount);
 
-// Código para el gráfico 4: Actividad de Publicaciones por Día de la Semana
-var chart4Data = {
-  labels: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
-  datasets: [{
-    label: 'Cantidad de Publicaciones',
-    data: [10, 8, 5, 12, 7, 6, 9],
-    backgroundColor: 'rgba(75, 192, 192, 0.5)',
-    borderColor: 'rgba(75, 192, 192, 1)',
-    borderWidth: 1
-  }]
-};
+  const ctx = document.getElementById("hashtagsChart").getContext("2d");
 
-var chart4 = new Chart(document.getElementById("chart4"), {
-  type: 'bar',
-  data: chart4Data,
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    }
-  }
-});
-
-// Código para el gráfico 5: Participación por Hora del Día
-var chart5Data = {
-  labels: ['12am', '4am', '8am', '12pm', '4pm', '8pm'],
-  datasets: [{
-    label: 'Participación',
-    data: [100, 80, 120, 200, 150, 180],
-    fill: false,
-    borderColor: 'rgba(54, 162, 235, 1)',
-    tension: 0.2
-  }]
-};
-
-var chart5 = new Chart(document.getElementById("chart5"), {
-  type: 'line',
-  data: chart5Data,
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    }
-  }
-});
+  new Chart(ctx, {
+    type: "pie",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          data: data,
+          backgroundColor: [
+            "rgba(75, 192, 192, 0.6)",
+            "rgba(54, 162, 235, 0.6)",
+            "rgba(255, 99, 132, 0.6)",
+            "rgba(255, 205, 86, 0.6)",
+            "rgba(153, 102, 255, 0.6)",
+          ],
+          borderColor: [
+            "rgba(75, 192, 192, 1)",
+            "rgba(54, 162, 235, 1)",
+            "rgba(255, 99, 132, 1)",
+            "rgba(255, 205, 86, 1)",
+            "rgba(153, 102, 255, 1)",
+          ],
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+    },
+  });
+}
