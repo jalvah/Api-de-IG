@@ -25,7 +25,7 @@ loginForm.addEventListener('submit', (event) => {
   // Validar el usuario y contraseña (ejemplo)
   if (username === 'usuario' && password === 'contraseña') {
     // Redireccionar a la página principal
-    window.location.href = '../PantallaPrincipal/home.html';
+    window.location.href = 'PantallaPrincipal/home.html';
   } else {
     alert('Credenciales incorrectas. Intente nuevamente.');
   }
