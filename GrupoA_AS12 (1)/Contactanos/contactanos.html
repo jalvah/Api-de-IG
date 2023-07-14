@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contactanos</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="contactanos.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="#"><img src="../logo.png" alt="Logo de la página"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="../PantallaPrincipal/home.html">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../Fotos/photos.html">Fotos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../Estadisticas/estadisticas.html">Estadísticas</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="../Contactanos/contactanos.html">Contacto</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+<section class="statistics py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h1 class="text-center mb-4">Contáctanos</h1>
+        <form class="contact-form">
+          <div class="form-group">
+            <label for="name">Nombre</label>
+            <input type="text" class="form-control" id="name" placeholder="Ingrese su nombre">
+          </div>
+          <div class="form-group">
+            <label for="email">Correo electrónico</label>
+            <input type="email" class="form-control" id="email" placeholder="Ingrese su correo electrónico">
+          </div>
+          <div class="form-group">
+            <label for="message">Mensaje</label>
+            <textarea class="form-control" id="message" rows="5" placeholder="Ingrese su mensaje"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Enviar mensaje</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section >
+  <footer class="bg-light py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <p class="text-center text-md-left">Todos los derechos reservados &copy; 2023</p>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center text-md-right">
+            <a href="#" class="text-dark mx-2"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="text-dark mx-2"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-dark mx-2"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="statistics.js"></script>
+</body>
+</html>
