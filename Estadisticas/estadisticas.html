@@ -27,7 +27,7 @@
               <a class="nav-link" href="estadisticas.html">Estadísticas</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Contacto</a>
+              <a class="nav-link" href="../Contactanos/contactanos.html">Contacto</a>
             </li>
           </ul>
         </div>
@@ -80,8 +80,52 @@
     </div>
   </footer>
 
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="statistics.js"></script>
+  <script>
+const token1 = `IGQVJWYjd5b2hFaXRpTkF4a0p3NHRkNzZA0dFVLbjRmYWZAGaDFS`
+const token2 = `UGV1TXdUcWdwQ3lJYjhOeGo5VC1FdmhHR1JjZ`;
+const token3 = `AHFSLWVoQ05sMnBuczd6el96cnJ2RW9FNG0`;
+const token4 = `3eks3dTJjXzJ2S1JVbzJVTXRxbTNFcgZDZD`;
+const url = `https://graph.instagram.com/me/media?fields=media_type&limit=80&access_token=${token1}${token2}${token3}${token4}`;
+
+fetch(url)
+  .then(res => res.json())
+  .then(data => {
+    const mediaTypes = data.data.map(item => item.media_type);
+    createChart(mediaTypes);
+  });
+
+function createChart(mediaTypes) {
+  const fotoCount = mediaTypes.filter(type => type === "IMAGE").length;
+  const videoCount = mediaTypes.filter(type => type === "VIDEO").length;
+
+  const ctx = document.getElementById('contentChart').getContext('2d');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Fotos', 'Videos'],
+      datasets: [{
+        label: 'Cantidad',
+        data: [fotoCount, videoCount],
+        backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(54, 162, 235, 0.6)'],
+        borderColor: ['rgba(75, 192, 192, 1)', 'rgba(54, 162, 235, 1)'],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          stepSize: 1
+        }
+      }
+    }
+  });
+}
+
+  </script>
 </body>
 </html>
